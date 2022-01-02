@@ -1,21 +1,15 @@
-import base64
-import io
-import os
 import shutil
 import traceback
-import uuid
 import json
 from pprint import pprint
 
-import cv2
-from flask import Flask, send_file, render_template
-from flask import request, Response
+
+from flask import Flask
+from flask import request
 from flask_cors import CORS, cross_origin
-from matplotlib import pyplot as plt
-from numpy import ndarray
 from werkzeug.utils import secure_filename
 from services import fourier, convolution, noise, interpolation
-from services.helper import make_unique_dir, concat_images, get_response_image, get_input_output_path
+from services.helper import get_response_image, get_input_output_path
 
 app = Flask(__name__)
 cors = CORS(app, resources={r"/api/*": {"origins": "*"}})
@@ -63,7 +57,7 @@ def convolution_route():
             "error": error,
         }
     output = get_response_image(out_file_path)
-    # shutil.rmtree(uploads_dir)
+    shutil.rmtree(uploads_dir)
     return {
         "status": "good",
         "output_image": output,
@@ -90,7 +84,7 @@ def interpolation_route():
             "error": error,
         }
     output = get_response_image(out_file_path)
-    # shutil.rmtree(uploads_dir)
+    shutil.rmtree(uploads_dir)
     return {
         "status": "good",
         "output_image": output,
@@ -116,7 +110,7 @@ def noise_route():
             "error": error,
         }
     output = get_response_image(out_file_path)
-    # shutil.rmtree(uploads_dir)
+    shutil.rmtree(uploads_dir)
     return {
         "status": "good",
         "output_image": output,
