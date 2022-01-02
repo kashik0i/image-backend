@@ -22,15 +22,15 @@ app.config['CORS_HEADERS'] = 'Content-Type'
 # from pathlib import Path
 # Path("").mkdir(parents=True, exist_ok=True)
 
-@app.route('/api/upload', methods=['POST'])
-@cross_origin()
-def upload_file():
-    print(f"image{request.files}")
-    input_image = request.files['image']
-    input_image.save(f"uploads/{secure_filename(input_image.filename)}")
-    return {
-        "state": "success"
-    }
+# @app.route('/api/upload', methods=['POST'])
+# @cross_origin()
+# def upload_file():
+#     print(f"image{request.files}")
+#     input_image = request.files['image']
+#     input_image.save(f"uploads/{secure_filename(input_image.filename)}")
+#     return {
+#         "state": "success"
+#     }
 
 
 @app.route('/api/convolution', methods=['POST'])
